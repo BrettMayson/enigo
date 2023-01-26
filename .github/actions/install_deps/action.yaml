@@ -13,7 +13,7 @@ runs:
           winget install -e --id Mozilla.Firefox
           echo "$RUNNER_OS"
         elif [ "$RUNNER_OS" == "macOS" ]; then
-          brew install --sask firefox
+          brew install --cask firefox
           echo "$RUNNER_OS"
         else
           echo "$RUNNER_OS not supported"
