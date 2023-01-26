@@ -1,5 +1,3 @@
-use enigo::KeyboardControllable;
-
 // #[cfg(feature = "test_browser")]
 mod browser;
 
