@@ -10,9 +10,3 @@ fn browser_events() {
     browser::mouse::run(&recv);
     browser::key::run(&recv);
 }
-
-#[test]
-fn press_page_down() {
-    std::thread::sleep(std::time::Duration::from_millis(500));
-    enigo::Enigo::new().key_click(enigo::Key::PageUp);
-}

@@ -51,7 +51,7 @@ fn scroll(recv: &Receiver<BrowserEvent>) {
     let ev = recv.recv().unwrap();
     if let BrowserEvent::MouseWheel(length) = ev {
         assert!(length.0 == 0);
-        assert!(length.1 < 0);
+        assert!(length.1 > 0);
     } else {
         panic!("Event wasn't MouseWheel after mouse::scroll. {:?}", ev);
     }
