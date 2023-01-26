@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enigo Universal Test</title>
+</head>
+<body>
+    <script>
+        const ws = new WebSocket('ws://localhost:26541');
+        ws.addEventListener('open', (event) => {
+            console.log('connected');
+            document.addEventListener('keydown', (event) => {
+                console.log('keydown', event.key);
+                ws.send('keydown:' + event.key);
+            });
+            document.addEventListener('keyup', (event) => {
+                console.log('keyup', event.key);
+                ws.send('keyup:' + event.key);
+            });
+            document.addEventListener('mousedown', (event) => {
+                console.log('mousedown', event.button);
+                ws.send('mousedown:' + event.button);
+            });
+            document.addEventListener('mouseup', (event) => {
+                console.log('mouseup', event.button);
+                ws.send('mouseup:' + event.button);
+            });
+            document.addEventListener('mousemove', (event) => {
+                console.log('mousemoveX', event.movementX, event.screenX);
+                console.log('mousemoveY', event.movementY, event.screenY);
+                ws.send('mousemove:' + event.movementX + ',' + event.movementY + '|' + event.screenX + ',' + event.screenY);
+            });
+            document.addEventListener('wheel', (event) => {
+                console.log('wheelY', event.deltaY);
+                console.log('wheelX', event.deltaX);
+                ws.send('mousewheel:' + event.deltaX + ',' + event.deltaY);
+            });
+        });
+        ws.addEventListener('close', (event) => {
+            console.log('disconnected');
+            document.write('test concluded. close this page.');
+        });
+    </script>
+</body>
+</html>

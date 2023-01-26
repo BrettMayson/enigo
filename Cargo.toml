@@ -23,8 +23,13 @@ appveyor = { repository = "pythoneer/enigo-85xiy" }
 serde = { version = "1.0.102", optional = true }
 serde_derive = { version = "1.0.102", optional = true }
 
+[dev-dependencies]
+websocket = "0.26.5"
+webbrowser = "0.8.6"
+
 [features]
 with_serde = ["serde", "serde_derive"]
+test_browser = []
 
 [target.'cfg(target_os = "windows")'.dependencies]
 winapi = { version = "0.3.8", features = ["winuser"] }

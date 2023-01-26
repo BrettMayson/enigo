@@ -58,7 +58,16 @@ impl MouseControllable for Enigo {
     }
 
     fn mouse_move_relative(&mut self, x: i32, y: i32) {
-        mouse_event(MOUSEEVENTF_MOVE, 0, x, y);
+        let point = &mut POINT { x: 0, y: 0 };
+        let coords;
+        unsafe {
+            coords = if GetCursorPos(point) != 0 {
+                ((*point).x, (*point).y)
+            } else {
+                (0, 0)
+            };
+        }
+        self.mouse_move_to(coords.0 + x, coords.1 + y);
     }
 
     fn mouse_down(&mut self, button: MouseButton) {
@@ -254,7 +263,7 @@ impl Enigo {
 
     fn key_to_scancode(&self, key: Key) -> u16 {
         let keycode = self.key_to_keycode(key);
-        unsafe { MapVirtualKeyW(keycode as u32, 0) as u16 }
+        unsafe { MapVirtualKeyW(keycode as u32, 4) as u16 }
     }
 
     fn get_layoutdependent_keycode(&self, string: String) -> u16 {

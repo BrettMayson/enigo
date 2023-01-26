@@ -1,6 +1,9 @@
 name: test
 
 on:
+  push:
+    branches:
+      - master
   workflow_dispatch:
   pull_request:
     branches:
@@ -28,6 +31,8 @@ jobs:
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ matrix.rust }}
+      - name: Setup headless display
+        uses: pyvista/setup-headless-display-action@v1
       - name: Test
         run: cargo test
 
@@ -49,5 +54,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@master
         with:
           toolchain: ${{ matrix.rust }}
+      - name: Setup headless display
+        uses: pyvista/setup-headless-display-action@v1
       - name: Test
         run: cargo test --all-features
