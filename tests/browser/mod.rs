@@ -72,7 +72,7 @@ pub fn launch() -> Receiver<BrowserEvent> {
             }
         }
     });
-    webbrowser::open_browser(Browser::Firefox, &format!("file://{}/tests/index.html", std::env::current_dir().unwrap().to_str().unwrap())).unwrap();
+    webbrowser::open(&format!("file://{}/tests/index.html", std::env::current_dir().unwrap().to_str().unwrap())).unwrap();
     if rs.recv() == Ok(BrowserEvent::Open) {
         enigo::Enigo::new().key_click(Key::F11);
         // Full screen animation
