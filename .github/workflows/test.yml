@@ -57,9 +57,10 @@ jobs:
           toolchain: ${{ matrix.rust }}
       - name: Setup headless display
         uses: pyvista/setup-headless-display-action@v1
-      - name: Setup firefox
-        uses: browser-actions/setup-firefox@v1
+      - name: Install Firefo
+        uses: abhi1693/setup-browser@v0.3.4
         with:
-          firefox-version: "latest"
+          browser: firefox
+          version: latest
       - name: Test
         run: cargo test --all-features
